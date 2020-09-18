@@ -1,5 +1,5 @@
 import pandas as pd
-import xlrd
+import os
 
 
 def readarticle(files):
@@ -18,6 +18,7 @@ def organizefiles(files):
     return colunas
 
 
+'''Analize data of equipment inversores'''
 def organizetupla(data):
     listdata = []
     lencollumn = len(data)
@@ -35,7 +36,21 @@ def organizetupla(data):
     return listdata
 
 
-caminho = r'D:\OneDrive\Área de Trabalho\steag\Sao Pedro_2020_09_16.xlsx'
+def criar_pastas(pasta):
+    if not os.path.isdir(pasta):
+        os.mkdir(pasta)
+
+def criar_sub(pasta):
+    newdir = pasta + ''
+    if pasta:
+        if not os.path.isdir():
+            os.mkdir()
+
+
+
+caminho = r'C:\Users\julio.firmino\Desktop\plantas\SPD - AGOSTO 2020_2020_09_18.xlsx'
+destino = r'c:\steag_plantas'
+criar_pastas(destino)
 #readarticle(caminho)
 column = organizefiles(caminho)
 x = organizetupla(column)
