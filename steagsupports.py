@@ -3,14 +3,12 @@ import pandas as pd
 import time
 
 
-def readarticle(files):
-    df = pd.read_csv(files, sep=',')
+def readframe(df):
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
-    # df['ACTIVE POWER'] = pd.to_datetime(df['ACTIVE POWER'])
-    # df['ACTIVE POWER'] = df['ACTIVE POWER'].dt.strftime('%H:%M:%S')
     df = df[['timestamp', 'ACTIVE POWER', 'COMS STATUS']]
-    df.to_csv(files, index=False)
+    return df
+    #df.to_csv(files, index=False)
 
 
 def criar_pastas(pasta):
@@ -36,11 +34,11 @@ def organizefiles(files):
 
 'Analize data of equipment inversores'
 def organizetupla(data):
+    flag = True
     listdata = []
     lencollumn = len(data)
     index1 = 1
     index2 = 2
-    flag = True
     while flag:
         collumntupla = (data[index1], data[index2])
         listdata.append(collumntupla)
