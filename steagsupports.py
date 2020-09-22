@@ -4,6 +4,55 @@ import time
 from datetime import datetime
 
 
+def option():
+    print('################################################')
+    print('Digite o período de extração dos dados:')
+    date1 = input('Data inicial: ')
+    start = formatdates(date1)
+    date2 = input('Data final: ')
+    end = formatdates(date2)
+    sheet_name = start + '_' + end
+    return sheet_name
+
+
+def option1():
+    flag = True
+    while flag:
+        opt = [0, 1, 2, 3]
+        plant = int(input('################################################'
+                          '\nTipos de opções disponíveis nesta aplicação:'
+                          '\nDigite 1 --> São Pedro'
+                          '\nDigite 2 --> Juazeiro'
+                          '\nDigite 3 --> Sol do Futuro'
+                          '\nDigite 0 --> Sair.'
+                          '\n################################################'
+                          '\nPrezado usuário, escolha uma opção?'))
+        if plant in opt:
+            return plant
+        else:
+            print('Opção incorreta, tente novamente.')
+            time.sleep(3)
+
+
+def option2():
+    flag = True
+    while flag:
+        opt2 = [0, 1, 2, 3]
+        plant2 = int(input('################################################'
+                           '\nSelecione um tipo de equipamento disponível:'
+                           '\nDigite 1 --> Inversores'
+                           '\nDigite 2 --> Strings'
+                           '\nDigite 3 --> Whether Station'
+                           '\nDigite 0 --> Sair.'
+                           '\n################################################'
+                           '\nPrezado usuário, escolha uma opção?'))
+        if plant2 in opt2:
+            return plant2
+        else:
+            print('Opção incorreta, tente novamente.')
+            time.sleep(3)
+
+
 def readframe(df):
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
@@ -49,34 +98,6 @@ def organizetupla(data):
         if index2 > lencollumn:
             flag = False
     return listdata
-
-
-def option():
-    date1 = input('Digite a data inicial: ')
-    start = formatdates(date1)
-    date2 = input('Digite a data final: ')
-    end = formatdates(date2)
-    sheet_name = start + '_' + end
-    return sheet_name
-
-
-def option1():
-    flag = True
-    while flag:
-        opt = [0, 1, 2, 3]
-        plant = int(input('################################################'
-                          '\nTipos de opções disponíveis nesta aplicação:'
-                          '\nDigite 1 --> São Pedro'
-                          '\nDigite 2 --> Juazeiro'
-                          '\nDigite 3 --> Sol do Futuro'
-                          '\nDigite 0 --> Sair.'
-                          '\n################################################'
-                          '\nPrezado usuário, escolha uma opção?'))
-        if plant in opt:
-            return plant
-        else:
-            print('Opção incorreta, tente novamente.')
-            time.sleep(3)
 
 
 def formatdates(date):
