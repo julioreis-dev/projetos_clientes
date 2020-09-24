@@ -20,7 +20,7 @@ def option1():
     while flag:
         opt = [0, 1, 2, 3]
         plant = int(input('################################################'
-                          '\nTipos de opções disponíveis nesta aplicação:'
+                          '\nEscolha uma das plantas disponíveis nesta aplicação:'
                           '\nDigite 1 --> São Pedro'
                           '\nDigite 2 --> Juazeiro'
                           '\nDigite 3 --> Sol do Futuro'
@@ -37,12 +37,13 @@ def option1():
 def option2():
     flag = True
     while flag:
-        opt2 = [0, 1, 2, 3]
+        opt2 = [0, 1, 2, 3, 4]
         plant2 = int(input('################################################'
                            '\nSelecione um tipo de equipamento disponível:'
                            '\nDigite 1 --> Inversores'
-                           '\nDigite 2 --> Strings'
-                           '\nDigite 3 --> Whether Station'
+                           '\nDigite 2 --> Strings Box'
+                           '\nDigite 3 --> Strings'
+                           '\nDigite 4 --> Weather Station'
                            '\nDigite 0 --> Sair.'
                            '\n################################################'
                            '\nPrezado usuário, escolha uma opção?'))
@@ -55,8 +56,18 @@ def option2():
 
 def readframe(df):
     df['timestamp'] = pd.to_datetime(df['timestamp'])
+    #print(df)
     df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+    print(df)
     df = df[['timestamp', 'ACTIVE POWER', 'COMS STATUS']]
+    print(df)
+    return df
+
+
+def readframe1(df):
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+    df = df[['timestamp', 'Current', 'Power', 'COMS STATUS']]
     return df
 
 
@@ -77,24 +88,42 @@ def createsubsheets(pasta):
 
 def organizefiles(files):
     df_data = pd.read_excel(files)
-    colunas = df_data.columns.values
-    return colunas
+    colun = df_data.columns.values
+    return colun
 
 
 'Analize data of equipment inversores'
 
 
-def organizetupla(data):
+def organizetuplainverter(listcol):
     flag = True
     listdata = []
-    lencollumn = len(data)
+    lencollumn = len(listcol)
     index1 = 1
     index2 = 2
     while flag:
-        collumntupla = (data[index1], data[index2])
+        collumntupla = (listcol[index1], listcol[index2])
         listdata.append(collumntupla)
         index1 += 2
         index2 += 2
+        if index2 > lencollumn:
+            flag = False
+    return listdata
+
+
+def organizetuplastrings(listcol):
+    flag = True
+    listdata = []
+    lencollumn = len(listcol)
+    index1 = 1
+    index2 = 2
+    index3 = 3
+    while flag:
+        collumntupla = (listcol[index1], listcol[index2], listcol[index3])
+        listdata.append(collumntupla)
+        index1 += 3
+        index2 += 3
+        index3 += 3
         if index2 > lencollumn:
             flag = False
     return listdata
@@ -138,11 +167,31 @@ def sheetdestination(*args):
 
 def stamp(*args):
     if args[2] == 1:
-        namestamp1 = f'são pedro - {args[0]} - {args[1][12:21]}'
+        namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:21]}'
         return namestamp1
     elif args[2] == 2:
-        namestamp2 = f'juazeiro - {args[0]} - {args[1][10:22]}'
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
         return namestamp2
     elif args[2] == 3:
-        namestamp3 = f'sol do futuro - {args[0]} - {args[1][16:27]}'
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
         return namestamp3
+
+
+def stamp1(*args):
+    if args[2] == 1:
+        namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
+        return namestamp1
+    elif args[2] == 2:
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
+        return namestamp2
+    elif args[2] == 3:
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
+        return namestamp3
+
+
+def executiontime(*args):
+    execution = args[0] - args[1]
+    hr = execution//3600
+    min = execution//60
+    seg = (execution % 60)//1
+    return hr, min, round(seg, 2)
