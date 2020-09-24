@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import time
+from openpyxl import load_workbook
 from datetime import datetime
 
 
@@ -55,12 +56,11 @@ def option2():
 
 
 def readframe(df):
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-    #print(df)
-    df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
-    print(df)
-    df = df[['timestamp', 'ACTIVE POWER', 'COMS STATUS']]
-    print(df)
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+    df['Time'] = pd.to_datetime(df['Time'])
+    df['Time'] = df['Time'].dt.strftime('%H:%M:%S')
+    df['Date'] = df['Date'] + ' ' + df['Time']
     return df
 
 
@@ -99,8 +99,8 @@ def organizetuplainverter(listcol):
     flag = True
     listdata = []
     lencollumn = len(listcol)
-    index1 = 1
-    index2 = 2
+    index1 = 2
+    index2 = 3
     while flag:
         collumntupla = (listcol[index1], listcol[index2])
         listdata.append(collumntupla)
@@ -111,13 +111,13 @@ def organizetuplainverter(listcol):
     return listdata
 
 
-def organizetuplastrings(listcol):
+def organizetuplastringsbox(listcol):
     flag = True
     listdata = []
     lencollumn = len(listcol)
-    index1 = 1
-    index2 = 2
-    index3 = 3
+    index1 = 3
+    index2 = 4
+    index3 = 5
     while flag:
         collumntupla = (listcol[index1], listcol[index2], listcol[index3])
         listdata.append(collumntupla)
@@ -193,5 +193,18 @@ def executiontime(*args):
     execution = args[0] - args[1]
     hr = execution//3600
     min = execution//60
-    seg = (execution % 60)//1
-    return hr, min, round(seg, 2)
+    seg = round((execution % 60)//1, 2)
+    return hr, min, seg
+
+
+def workdata(*args):
+    wb = load_workbook(filename=args[0])
+    ws = wb.get_sheet_names()
+    sheet = wb.get_sheet_by_name(ws[0])
+    contline = sheet.max_row
+    for line in range(2, contline+1):
+        datas = sheet.cell(row=line, column=1).value
+
+        print(type(datas))
+        print(datas)
+    pass
