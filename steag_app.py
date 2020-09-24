@@ -3,7 +3,8 @@ from time import time
 import steagframes
 
 
-caminho = r'D:\OneDrive\Área de Trabalho\steag\atual\Sol do Futuro - AGOSTO 2020_2020_09_18.xlsx'
+selected = input('Digite o nome do arquivo (.xlsx):')
+caminho = r'C:\Users\julio.firmino\Desktop\plantas\{}.xlsx'.format(selected)
 destino = r'c:\steag_plantas'
 steagsupports.createsheets(destino)
 steagsupports.createsubsheets(destino)
@@ -17,13 +18,14 @@ if choose != 0:
     if equipment == 1:
         steagframes.calcinverter(caminho, period, choose, destino)
     elif equipment == 2:
-        steagframes.calcstrings(caminho, period, choose, destino)
+        steagframes.calcstringsbox(caminho, period, choose, destino)
     elif equipment == 3:
-        steagframes.calcwether(caminho, period, choose, destino)
+        steagframes.calcstrings(caminho, period, choose, destino)
+    elif equipment == 4:
+        steagframes.calcweather(caminho, period, choose, destino)
     v1 = time()
-    executiontime = (v1 - v0)
+    tm = steagsupports.executiontime(v1, v0)
     print('Processo finalizado com sucesso!!!')
-    print('Tempo de execução da aplicação: {} hs : {} min : {} seg'
-          .format(executiontime//3600, executiontime//60, round((executiontime % 60)//1, 2)))
+    print('Tempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
 else:
     exit()
