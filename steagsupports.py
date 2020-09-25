@@ -137,31 +137,35 @@ def formatdates(date):
 
 def sheetperiod(*args):
     if args[0] == 1:
-        sheetdest = f'{args[1]}\são pedro'
-        sheets = os.path.join(sheetdest, args[2])
+        #sheetdest = os.path.join(args[1], 'são pedro')
+        #sheetdest = f'{args[1]}\são pedro'
+        sheets = os.path.join(args[1], 'são pedro', args[2])
         if not os.path.isdir(sheets):
             os.mkdir(sheets)
     elif args[0] == 2:
-        sheetdest = f'{args[1]}\juazeiro'
-        sheets = os.path.join(sheetdest, args[2])
+        #sheetdest = f'{args[1]}\juazeiro'
+        sheets = os.path.join(args[1], 'juazeiro', args[2])
         if not os.path.isdir(sheets):
             os.mkdir(sheets)
     elif args[0] == 3:
-        sheetdest = f'{args[1]}\sol do futuro'
-        sheets = os.path.join(sheetdest, args[2])
+        #sheetdest = f'{args[1]}\sol do futuro'
+        sheets = os.path.join(args[1], 'sol do futuro', args[2])
         if not os.path.isdir(sheets):
             os.mkdir(sheets)
 
 
 def sheetdestination(*args):
     if args[2] == 1:
-        sheetdest1 = f'{args[0]}\são pedro\{args[1]}'
+        sheetdest1 = os.path.join(args[0], 'são pedro', args[1])
+        #sheetdest1 = f'{args[0]}\são pedro\{args[1]}'
         return sheetdest1
     elif args[2] == 2:
-        sheetdest2 = f'{args[0]}\juazeiro\{args[1]}'
+        sheetdest2 = os.path.join(args[0], 'juazeiro', args[1])
+        #sheetdest2 = f'{args[0]}\juazeiro\{args[1]}'
         return sheetdest2
     elif args[2] == 3:
-        sheetdest3 = f'{args[0]}\sol do futuro\{args[1]}'
+        sheetdest3 = os.path.join(args[0], 'sol do futuro', args[1])
+        #sheetdest3 = f'{args[0]}\sol do futuro\{args[1]}'
         return sheetdest3
 
 
@@ -192,9 +196,9 @@ def stamp1(*args):
 def executiontime(*args):
     execution = args[0] - args[1]
     hr = execution//3600
-    min = execution//60
+    minute = execution // 60
     seg = round((execution % 60)//1, 2)
-    return hr, min, seg
+    return hr, minute, seg
 
 
 def workdata(*args):
@@ -204,7 +208,5 @@ def workdata(*args):
     contline = sheet.max_row
     for line in range(2, contline+1):
         datas = sheet.cell(row=line, column=1).value
-
         print(type(datas))
         print(datas)
-    pass
