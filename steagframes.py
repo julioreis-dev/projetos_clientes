@@ -47,6 +47,6 @@ def calcweather(*args):
     df_fin = steagsupports.readframe(df_fin)
     df_fin = df_fin.fillna(0.00)
     df_fin.rename(columns={'Date': 'timestamp'}, inplace=True)
-    df_fin['timestamp'] = pd.to_datetime(df_fin['timestamp'])
-    df_fin['timestamp'] = df_fin['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+    #df_fin['timestamp'] = pd.to_datetime(df_fin['timestamp'])
+    #df_fin['timestamp'] = df_fin['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
     print(df_fin)
