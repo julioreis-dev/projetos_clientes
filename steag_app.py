@@ -4,7 +4,7 @@ import steagframes
 
 
 selected = input('Digite o nome do arquivo (.xlsx):')
-caminho = r'C:\Users\julio.firmino\Desktop\plantas\simulado\{}.xlsx'.format(selected)
+caminho = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selected)
 destino = r'c:\steag_plantas'
 #steagsupports.workdata(caminho)
 steagsupports.createsheets(destino)
