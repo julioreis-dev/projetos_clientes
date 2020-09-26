@@ -5,6 +5,7 @@ from openpyxl import load_workbook
 from datetime import datetime
 
 
+# Function to input extract period
 def option():
     print('################################################')
     print('Digite o período de extração dos dados:')
@@ -16,6 +17,7 @@ def option():
     return sheet_name
 
 
+# Option to choose plants
 def option1():
     flag = True
     while flag:
@@ -35,6 +37,7 @@ def option1():
             time.sleep(3)
 
 
+# Option to choose equipments
 def option2():
     flag = True
     while flag:
@@ -55,6 +58,7 @@ def option2():
             time.sleep(3)
 
 
+# Function to deal with date, time column to convert in correct format
 def readframe(df):
     df['Date'] = pd.to_datetime(df['Date'])
     df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
@@ -64,18 +68,13 @@ def readframe(df):
     return df
 
 
-def readframe1(df):
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-    df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
-    df = df[['timestamp', 'Current', 'Power', 'COMS STATUS']]
-    return df
-
-
+# Function to create sheet 'steag_plantas'
 def createsheets(pasta):
     if not os.path.isdir(pasta):
         os.mkdir(pasta)
 
 
+# Function to create sheet to each plant inside 'steag_plantas'
 def createsubsheets(pasta):
     sheet1 = os.path.join(pasta, 'são pedro')
     sheet2 = os.path.join(pasta, 'juazeiro')
@@ -86,15 +85,14 @@ def createsubsheets(pasta):
             os.mkdir(n)
 
 
+# Function that return list with column names
 def organizefiles(files):
     df_data = pd.read_excel(files)
     colun = df_data.columns.values
     return colun
 
 
-'Analize data of equipment inversores'
-
-
+# Function to analize data of equipment inverter
 def organizetuplainverter(listcol):
     flag = True
     listdata = []
@@ -111,13 +109,14 @@ def organizetuplainverter(listcol):
     return listdata
 
 
+# Function to analize data of equipment stringbox
 def organizetuplastringsbox(listcol):
     flag = True
     listdata = []
     lencollumn = len(listcol)
-    index1 = 3
-    index2 = 4
-    index3 = 5
+    index1 = 2
+    index2 = 3
+    index3 = 4
     while flag:
         collumntupla = (listcol[index1], listcol[index2], listcol[index3])
         listdata.append(collumntupla)
@@ -129,46 +128,58 @@ def organizetuplastringsbox(listcol):
     return listdata
 
 
+# Function to analize data of equipment strings
+def organizetuplastrings(listcol):
+    flag = True
+    listdata = []
+    lencollumn = len(listcol)
+    index1 = 2
+    while flag:
+        collumntupla = (listcol[index1])
+        listdata.append(collumntupla)
+        index1 += 1
+        if index1 > lencollumn:
+            flag = False
+    return listdata
+
+
+# Function to prepare date to use as names in sheets
 def formatdates(date):
     timedata = datetime.strptime(date, '%d/%m/%Y').date()
     formatdata = timedata.strftime('%Y-%m-%d')
     return formatdata
 
 
+# Function to create period sheet to receive all content
 def sheetperiod(*args):
     if args[0] == 1:
-        #sheetdest = os.path.join(args[1], 'são pedro')
-        #sheetdest = f'{args[1]}\são pedro'
         sheets = os.path.join(args[1], 'são pedro', args[2])
         if not os.path.isdir(sheets):
             os.mkdir(sheets)
     elif args[0] == 2:
-        #sheetdest = f'{args[1]}\juazeiro'
         sheets = os.path.join(args[1], 'juazeiro', args[2])
         if not os.path.isdir(sheets):
             os.mkdir(sheets)
     elif args[0] == 3:
-        #sheetdest = f'{args[1]}\sol do futuro'
         sheets = os.path.join(args[1], 'sol do futuro', args[2])
         if not os.path.isdir(sheets):
             os.mkdir(sheets)
 
 
+# Function to inform correct sheet destiny address
 def sheetdestination(*args):
     if args[2] == 1:
         sheetdest1 = os.path.join(args[0], 'são pedro', args[1])
-        #sheetdest1 = f'{args[0]}\são pedro\{args[1]}'
         return sheetdest1
     elif args[2] == 2:
         sheetdest2 = os.path.join(args[0], 'juazeiro', args[1])
-        #sheetdest2 = f'{args[0]}\juazeiro\{args[1]}'
         return sheetdest2
     elif args[2] == 3:
         sheetdest3 = os.path.join(args[0], 'sol do futuro', args[1])
-        #sheetdest3 = f'{args[0]}\sol do futuro\{args[1]}'
         return sheetdest3
 
 
+# Function to create name to each inverter equipment
 def stamp(*args):
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:21]}'
@@ -181,6 +192,7 @@ def stamp(*args):
         return namestamp3
 
 
+# Function to create name to each stringbox and string equipments
 def stamp1(*args):
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
@@ -193,20 +205,43 @@ def stamp1(*args):
         return namestamp3
 
 
+# Function to calculate time execution
 def executiontime(*args):
     execution = args[0] - args[1]
-    hr = execution//3600
+    hr = execution // 3600
     minute = execution // 60
-    seg = round((execution % 60)//1, 2)
+    seg = round((execution % 60) // 1, 2)
     return hr, minute, seg
 
 
+################
+def stamp2(*args):
+    if args[2] == 1:
+        namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
+        return namestamp1
+    elif args[2] == 2:
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
+        return namestamp2
+    elif args[2] == 3:
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
+        return namestamp3
+
+
+################
 def workdata(*args):
     wb = load_workbook(filename=args[0])
     ws = wb.get_sheet_names()
     sheet = wb.get_sheet_by_name(ws[0])
     contline = sheet.max_row
-    for line in range(2, contline+1):
+    for line in range(2, contline + 1):
         datas = sheet.cell(row=line, column=1).value
         print(type(datas))
         print(datas)
+
+
+################
+def readframe1(df):
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+    df = df[['timestamp', 'Current', 'Power', 'COMS STATUS']]
+    return df
