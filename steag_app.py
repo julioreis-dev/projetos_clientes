@@ -5,7 +5,7 @@ import steagframes
 '''
 Esta aplicação tem por finalidade trabalhar a planilha com extensão (.xlsx) que contem os dados oriundos da extração VPN
 levando em consideração os critérios de cada equipamento e as suas respectivas plantas. O produto final
-fornece diversos arquivos divididos com extenção (.csv) que servirá como base para a aplicação corporativa 
+fornece diversos arquivos divididos com extensão (.csv) que servirá como base para a aplicação corporativa 
 que calcula os indices de interesse e relevância do negócio.
 '''
 
