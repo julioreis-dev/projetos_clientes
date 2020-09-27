@@ -131,7 +131,7 @@ def organizetuplastringsbox(listcol):
 # Function to analize data of equipment strings
 def organizetuplastrings(listcol):
     flag = True
-    listdata = []
+    listdata = list
     lencollumn = len(listcol)
     index1 = 2
     while flag:
@@ -198,7 +198,7 @@ def stamp1(*args):
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
         return namestamp1
     elif args[2] == 2:
-        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:25]}'
         return namestamp2
     elif args[2] == 3:
         namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
