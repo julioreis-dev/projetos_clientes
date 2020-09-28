@@ -17,24 +17,25 @@ def main():
     steagsupports.createsheets(destino)
     steagsupports.createsubsheets(destino)
     period = steagsupports.option()
-    choose = steagsupports.option1()
-    equipment = steagsupports.option2()
-    steagsupports.sheetperiod(choose, destino, period)
-    if choose != 0:
-        print('Processando.......\n')
-        v0 = time()
-        if equipment == 1:
-            steagframes.calcinverter(caminho, period, choose, destino)
-        elif equipment == 2:
-            steagframes.calcstringsbox(caminho, period, choose, destino)
-        elif equipment == 3:
-            steagframes.calcstrings(caminho, period, choose, destino)
-        elif equipment == 4:
-            steagframes.calcweather(caminho, period, choose, destino)
-        v1 = time()
-        tm = steagsupports.executiontime(v1, v0)
-        print('Processo finalizado com sucesso!!!')
-        print('Tempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
+    place = steagsupports.option1()
+    if place !=0:
+        equipment = steagsupports.option2()
+        if equipment!=0:
+            v0 = time()
+            steagsupports.sheetperiod(place, destino, period)
+            print('Processando.......\n')
+            if equipment == 1:
+                steagframes.calcinverter(caminho, period, place, destino)
+            elif equipment == 2:
+                steagframes.calcstringsbox(caminho, period, place, destino)
+            elif equipment == 3:
+                steagframes.calcstrings(caminho, period, place, destino)
+            elif equipment == 4:
+                steagframes.calcweather(caminho, period, place, destino)
+            v1 = time()
+            tm = steagsupports.executiontime(v1, v0)
+            print('Processo finalizado com sucesso!!!')
+            print('Tempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
     else:
         exit()
 
