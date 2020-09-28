@@ -58,7 +58,7 @@ def option2():
             time.sleep(3)
 
 
-# Function to deal with date, time column to convert in correct format
+# Function to format date column and time column
 def readframe(df):
     df['Date'] = pd.to_datetime(df['Date'])
     df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
@@ -85,7 +85,7 @@ def createsubsheets(pasta):
             os.mkdir(n)
 
 
-# Function that return list with column names
+# Function that return list with column names(Descarte)
 def organizefiles(files):
     df_data = pd.read_excel(files)
     colun = df_data.columns.values
@@ -128,10 +128,10 @@ def organizetuplastringsbox(listcol):
     return listdata
 
 
-# Function to analize data of equipment strings
+# Function to analize data of equipment strings (descarte)
 def organizetuplastrings(listcol):
     flag = True
-    listdata = list
+    listdata = []
     lencollumn = len(listcol)
     index1 = 2
     while flag:
@@ -192,16 +192,29 @@ def stamp(*args):
         return namestamp3
 
 
-# Function to create name to each stringbox and string equipments
+# Function to create name to each stringbox equipments
 def stamp1(*args):
     if args[2] == 1:
-        namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
+        namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:25]}'
         return namestamp1
     elif args[2] == 2:
         namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:25]}'
         return namestamp2
     elif args[2] == 3:
-        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:26]}'
+        return namestamp3
+
+
+# Function to create name to each string equipments
+def stamp2(*args):
+    if args[2] == 1:
+        namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'
+        return namestamp1
+    elif args[2] == 2:
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:25]}'
+        return namestamp2
+    elif args[2] == 3:
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:26]}'
         return namestamp3
 
 
@@ -215,7 +228,7 @@ def executiontime(*args):
 
 
 ################
-def stamp2(*args):
+def stamp3(*args):
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
         return namestamp1
