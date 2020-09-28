@@ -18,24 +18,28 @@ def main():
     steagsupports.createsubsheets(destino)
     period = steagsupports.option()
     place = steagsupports.option1()
-    if place !=0:
+    if place != 0:
         equipment = steagsupports.option2()
-        if equipment!=0:
+        if equipment != 0:
             v0 = time()
             steagsupports.sheetperiod(place, destino, period)
             print('Processando.......\n')
             if equipment == 1:
-                steagframes.calcinverter(caminho, period, place, destino)
+                continv = steagframes.calcinverter(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivos processados'.format(continv))
             elif equipment == 2:
-                steagframes.calcstringsbox(caminho, period, place, destino)
+                contbox = steagframes.calcstringsbox(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivos processados'.format(contbox))
             elif equipment == 3:
-                steagframes.calcstrings(caminho, period, place, destino)
+                contstrings = steagframes.calcstrings(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivos processados'.format(contstrings))
             elif equipment == 4:
-                steagframes.calcweather(caminho, period, place, destino)
+                contweather = steagframes.calcweather(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivo processado'.format(contweather))
             v1 = time()
             tm = steagsupports.executiontime(v1, v0)
-            print('Processo finalizado com sucesso!!!')
             print('Tempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
+            print('Processo finalizado com sucesso!!!')
     else:
         exit()
 
