@@ -8,6 +8,7 @@ def calcinverter(*args):
     df = pd.read_excel(args[0])
     column = df.columns.values
     lista_plant = steagsupports.organizetuplainverter(column)
+    numberinv = 0
     for i in lista_plant:
         columnfilter = [column[0], column[1], i[0], i[1]]
         df_fin = df.filter(items=columnfilter)
@@ -19,7 +20,9 @@ def calcinverter(*args):
         files = steagsupports.sheetdestination(args[3], args[1], args[2])
         sheetname = r'{}\{}.csv'.format(files, namesfile)
         df_fin.to_csv(sheetname, index=False)
+        numberinv+=1
         print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
+    return numberinv
 
 
 # Function to create dataframe to stringbox equipment and save in sheet destiny
@@ -27,6 +30,7 @@ def calcstringsbox(*args):
     df = pd.read_excel(args[0])
     column = df.columns.values
     lista_plant = steagsupports.organizetuplastringsbox(column)
+    numberbox=0
     for i in lista_plant:
         columnfilter = [column[0], column[1], i[1], i[2], i[0]]
         df_fin = df.filter(items=columnfilter)
@@ -38,13 +42,16 @@ def calcstringsbox(*args):
         files = steagsupports.sheetdestination(args[3], args[1], args[2])
         sheetname = r'{}\{}.csv'.format(files, namesfile)
         df_fin.to_csv(sheetname, index=False)
+        numberbox+=1
         print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
+    return numberbox
 
 
 # Function to create dataframe to string equipment and save in sheet destiny
 def calcstrings(*args):
     df = pd.read_excel(args[0])
     column = df.columns.values
+    numberstrings=0
     for i in range(2, len(column)):
         columnfilter = [column[0], column[1], column[i]]
         df_fin = df.filter(items=columnfilter)
@@ -56,7 +63,9 @@ def calcstrings(*args):
         files = steagsupports.sheetdestination(args[3], args[1], args[2])
         sheetname = r'{}\{}.csv'.format(files, namesfile)
         df_fin.to_csv(sheetname, index=False)
+        numberstrings+=1
         print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
+    return numberstrings
 
 
 # Function o create dataframe to weather station equipment and save in sheet destiny
@@ -72,6 +81,7 @@ def calcweather(*args):
     sheetname = r'{}\{}.csv'.format(direct, namestamp)
     df_fin.to_csv(sheetname, index=False)
     print('Arquivo "{}" salvo com sucesso!!!'.format(namestamp))
+    return 1
 
 
 # Function to create dataframe to inverter equipment and save in sheet destiny
