@@ -181,6 +181,7 @@ def sheetdestination(*args):
 
 # Function to create name to each inverter equipment
 def stamp(*args):
+    workplant(2)
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:21]}'
         return namestamp1
@@ -194,6 +195,7 @@ def stamp(*args):
 
 # Function to create name to each stringbox equipments
 def stamp1(*args):
+    workplant(3)
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:25]}'
         return namestamp1
@@ -207,14 +209,15 @@ def stamp1(*args):
 
 # Function to create name to each string equipments
 def stamp2(*args):
+    workplant(1.8)
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'
         return namestamp1
     elif args[2] == 2:
-        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:25]}'
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:27]}'
         return namestamp2
     elif args[2] == 3:
-        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:26]}'
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:45]}'
         return namestamp3
 
 
@@ -258,3 +261,8 @@ def readframe1(df):
     df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
     df = df[['timestamp', 'Current', 'Power', 'COMS STATUS']]
     return df
+
+
+################
+def workplant(temp):
+    time.sleep(temp)
