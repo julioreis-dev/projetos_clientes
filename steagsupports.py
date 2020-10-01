@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import time
-from openpyxl import load_workbook
 from datetime import datetime
 
 
@@ -181,7 +180,7 @@ def sheetdestination(*args):
 
 # Function to create name to each inverter equipment
 def stamp(*args):
-    workplant(2)
+    workplant(5)
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:21]}'
         return namestamp1
@@ -214,7 +213,7 @@ def stamp2(*args):
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'
         return namestamp1
     elif args[2] == 2:
-        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:27]}'
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:43]}'
         return namestamp2
     elif args[2] == 3:
         namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:45]}'
@@ -225,42 +224,57 @@ def stamp2(*args):
 def executiontime(*args):
     execution = args[0] - args[1]
     hr = execution // 3600
-    minute = execution // 60
-    seg = round((execution % 60) // 1, 2)
+    if hr == 0:
+        minute = execution // 60
+        seg = round((execution % 60) // 1, 2)
+    else:
+        restseg = hr % 3600
+        minute = restseg // 60
+        seg = round((minute % 60) // 1, 2)
     return hr, minute, seg
 
 
-################
-def stamp3(*args):
-    if args[2] == 1:
-        namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
-        return namestamp1
-    elif args[2] == 2:
-        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
-        return namestamp2
-    elif args[2] == 3:
-        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
-        return namestamp3
+# #####################
+# def executiontime(*args):
+#     execution = args[0] - args[1]
+#     hr = execution // 3600
+#     restseg = hr % 3600
+#     minute = restseg // 60
+#     seg = round((restseg % 60) // 1, 2)
+#     return hr, minute, seg
 
 
-################
-def workdata(*args):
-    wb = load_workbook(filename=args[0])
-    ws = wb.get_sheet_names()
-    sheet = wb.get_sheet_by_name(ws[0])
-    contline = sheet.max_row
-    for line in range(2, contline + 1):
-        datas = sheet.cell(row=line, column=1).value
-        print(type(datas))
-        print(datas)
-
-
-################
-def readframe1(df):
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-    df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
-    df = df[['timestamp', 'Current', 'Power', 'COMS STATUS']]
-    return df
+# ################
+# def stamp3(*args):
+#     if args[2] == 1:
+#         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
+#         return namestamp1
+#     elif args[2] == 2:
+#         namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
+#         return namestamp2
+#     elif args[2] == 3:
+#         namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
+#         return namestamp3
+#
+#
+# ################
+# def workdata(*args):
+#     wb = load_workbook(filename=args[0])
+#     ws = wb.get_sheet_names()
+#     sheet = wb.get_sheet_by_name(ws[0])
+#     contline = sheet.max_row
+#     for line in range(2, contline + 1):
+#         datas = sheet.cell(row=line, column=1).value
+#         print(type(datas))
+#         print(datas)
+#
+#
+# ################
+# def readframe1(df):
+#     df['timestamp'] = pd.to_datetime(df['timestamp'])
+#     df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+#     df = df[['timestamp', 'Current', 'Power', 'COMS STATUS']]
+#     return df
 
 
 ################
