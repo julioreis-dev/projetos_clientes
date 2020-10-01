@@ -13,7 +13,7 @@ que calcula os indices de interesse e relevância do negócio.
 def main():
     print('################# Steag Energy Service Brasil #################')
     selected = input('Digite o nome do arquivo (.xlsx):')
-    caminho = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selected)
+    caminho = r'C:\Users\julio.firmino\Desktop\plantas\simulado\{}.xlsx'.format(selected)
     destino = r'c:\steag_plantas'
     steagsupports.createsheets(destino)
     steagsupports.createsubsheets(destino)
