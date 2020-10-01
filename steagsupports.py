@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import time
 from datetime import datetime
+from random import randint
 
 
 # Function to input extract period
@@ -180,12 +181,12 @@ def sheetdestination(*args):
 
 # Function to create name to each inverter equipment
 def stamp(*args):
-    workplant(5)
+    workplant(10)
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:21]}'
         return namestamp1
     elif args[2] == 2:
-        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
+        namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:22]}'
         return namestamp2
     elif args[2] == 3:
         namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
@@ -194,7 +195,7 @@ def stamp(*args):
 
 # Function to create name to each stringbox equipments
 def stamp1(*args):
-    workplant(3)
+    workplant(10)
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:25]}'
         return namestamp1
@@ -208,7 +209,7 @@ def stamp1(*args):
 
 # Function to create name to each string equipments
 def stamp2(*args):
-    workplant(1.8)
+    workplant(10)
     if args[2] == 1:
         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'
         return namestamp1
@@ -279,4 +280,5 @@ def executiontime(*args):
 
 ################
 def workplant(temp):
-    time.sleep(temp)
+    sec = randint(0, temp)
+    time.sleep(sec)
