@@ -76,7 +76,7 @@ def calcweather(*args):
     df_fin.rename(columns={'Date': 'timestamp'}, inplace=True)
     del df_fin['Time']
     direct = steagsupports.sheetdestination(args[3], args[1], args[2])
-    namestamp = f'{plant[args[2] - 1]}-Weather Station'
+    namestamp = f'{plant[args[2] - 1]}-data-{args[1]}-Weather station'
     sheetname = r'{}\{}.csv'.format(direct, namestamp)
     df_fin.to_csv(sheetname, index=False)
     print('Arquivo "{}" salvo com sucesso!!!'.format(namestamp))
