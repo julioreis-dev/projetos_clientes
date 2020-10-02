@@ -7,6 +7,17 @@ Esta aplicação tem por finalidade trabalhar a planilha com extensão (.xlsx) q
 levando em consideração os critérios de cada equipamento e as suas respectivas plantas. O produto final
 fornece diversos arquivos divididos com extensão (.csv) que servirá como base para a aplicação corporativa 
 que calcula os indices de interesse e relevância do negócio.
+
+Dados de entrada:
+
+Variáveis Inversores
+Active Power - COMS STATUS
+
+Variáveis String Box
+COMS STATUS - Current - Power
+
+Variáveis Strings
+DC CURRENT STRING XX
 '''
 
 
