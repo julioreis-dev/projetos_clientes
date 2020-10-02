@@ -217,8 +217,20 @@ def stamp2(*args):
         namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:43]}'
         return namestamp2
     elif args[2] == 3:
-        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:45]}'
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:52]}'
         return namestamp3
+
+######
+def labelstampstring(*args):
+    if args[0] == 1:
+        namestamp1 = f'{args[1][30:50]}'
+        return namestamp1
+    elif args[0] == 2:
+        labelstamp2 = f'{args[1][47:66]}'
+        return labelstamp2
+    elif args[0] == 3:
+        labelstamp3 = f'{args[1][55:75]}'
+        return labelstamp3
 
 
 # Function to calculate time execution
@@ -229,56 +241,12 @@ def executiontime(*args):
         minute = execution // 60
         seg = round((execution % 60) // 1, 2)
     else:
-        restseg = hr % 3600
-        minute = restseg // 60
+        resthr = execution % 3600
+        minute = resthr // 60
         seg = round((minute % 60) // 1, 2)
     return hr, minute, seg
 
 
-# #####################
-# def executiontime(*args):
-#     execution = args[0] - args[1]
-#     hr = execution // 3600
-#     restseg = hr % 3600
-#     minute = restseg // 60
-#     seg = round((restseg % 60) // 1, 2)
-#     return hr, minute, seg
-
-
-# ################
-# def stamp3(*args):
-#     if args[2] == 1:
-#         namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:26]}'
-#         return namestamp1
-#     elif args[2] == 2:
-#         namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][10:22]}'
-#         return namestamp2
-#     elif args[2] == 3:
-#         namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:27]}'
-#         return namestamp3
-#
-#
-# ################
-# def workdata(*args):
-#     wb = load_workbook(filename=args[0])
-#     ws = wb.get_sheet_names()
-#     sheet = wb.get_sheet_by_name(ws[0])
-#     contline = sheet.max_row
-#     for line in range(2, contline + 1):
-#         datas = sheet.cell(row=line, column=1).value
-#         print(type(datas))
-#         print(datas)
-#
-#
-# ################
-# def readframe1(df):
-#     df['timestamp'] = pd.to_datetime(df['timestamp'])
-#     df['timestamp'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
-#     df = df[['timestamp', 'Current', 'Power', 'COMS STATUS']]
-#     return df
-
-
-################
 def workplant(temp):
     sec = randint(0, temp)
     time.sleep(sec)
