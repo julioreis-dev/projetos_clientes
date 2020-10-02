@@ -179,7 +179,7 @@ def sheetdestination(*args):
         return sheetdest3
 
 
-# Function to create name to each inverter equipment
+# Function to create name to each file inverter
 def stamp(*args):
     workplant(10)
     if args[2] == 1:
@@ -193,7 +193,7 @@ def stamp(*args):
         return namestamp3
 
 
-# Function to create name to each stringbox equipments
+# Function to create name to each file stringbox
 def stamp1(*args):
     workplant(10)
     if args[2] == 1:
@@ -203,11 +203,11 @@ def stamp1(*args):
         namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:25]}'
         return namestamp2
     elif args[2] == 3:
-        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:26]}'
+        namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:46]}'
         return namestamp3
 
 
-# Function to create name to each string equipments
+# Function to create name to each file string
 def stamp2(*args):
     workplant(10)
     if args[2] == 1:
@@ -220,13 +220,14 @@ def stamp2(*args):
         namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:52]}'
         return namestamp3
 
-######
+
+# Function to create label name to each string
 def labelstampstring(*args):
     if args[0] == 1:
         namestamp1 = f'{args[1][30:50]}'
         return namestamp1
     elif args[0] == 2:
-        labelstamp2 = f'{args[1][47:66]}'
+        labelstamp2 = f'{args[1][46:66]}'
         return labelstamp2
     elif args[0] == 3:
         labelstamp3 = f'{args[1][55:75]}'
