@@ -57,7 +57,8 @@ def calcstrings(*args):
         df_fin = steagsupports.readframe(df_fin)
         df_fin = df_fin[[column[0], column[i]]]
         df_fin = df_fin.fillna(0.00)
-        df_fin.rename(columns={'Date': 'timestamp', column[i]: 'DC Current String'}, inplace=True)
+        labelcolumn = steagsupports.labelstampstring(args[2], column[i])
+        df_fin.rename(columns={'Date': 'timestamp', column[i]: labelcolumn}, inplace=True)
         namesfile = steagsupports.stamp2(args[1], column[i], args[2], 'String')
         files = steagsupports.sheetdestination(args[3], args[1], args[2])
         sheetname = r'{}\{}.csv'.format(files, namesfile)
@@ -67,7 +68,7 @@ def calcstrings(*args):
     return numberstrings
 
 
-# Function o create dataframe to weather station equipment and save in sheet destiny
+# Function to create dataframe to weather station equipment
 def calcweather(*args):
     plant = ['Sao Pedro', 'Juazeiro', 'Sol do Futuro']
     df_fin = pd.read_excel(args[0])
