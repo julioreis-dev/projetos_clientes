@@ -63,5 +63,5 @@ class Stringbox:
             namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:25]}'
             return namestamp2
         elif args[2] == 3:
-            namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:46]}'
+            namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:45]}'
             return namestamp3
