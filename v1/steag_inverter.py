@@ -24,7 +24,6 @@ class Inverter:
             df_fin.to_csv(sheetname, index=False)
             numberinv += 1
             print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
-        #print('\nVolume de dados: {} arquivos processados'.format(numberinv))
 
     @staticmethod
     # Function to analize data of equipment inverter
