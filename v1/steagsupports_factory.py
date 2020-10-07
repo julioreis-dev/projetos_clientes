@@ -57,14 +57,16 @@ def option2():
             time.sleep(3)
 
 
-# Function to format date column and time column
-# def readframe(df):
-#     df['Date'] = pd.to_datetime(df['Date'])
-#     df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
-#     df['Time'] = pd.to_datetime(df['Time'])
-#     df['Time'] = df['Time'].dt.strftime('%H:%M:%S')
-#     df['Date'] = df['Date'] + ' ' + df['Time']
-#     return df
+def openfiles(*args):
+    openfiles_list = []
+    cont = 1
+    for n in range(0,4):
+        df_read = pd.read_excel(args[n])
+        openfiles_list.append(df_read)
+        print('Etapa {}/4 realizado com sucesso'.format(cont))
+        cont+=1
+    time.sleep(3)
+    return openfiles_list
 
 
 # Function to create sheet 'steag_plantas'
@@ -89,42 +91,6 @@ def organizefiles(files):
     df_data = pd.read_excel(files)
     colun = df_data.columns.values
     return colun
-
-
-# # Function to analize data of equipment inverter
-# def organizetuplainverter(listcol):
-#     flag = True
-#     listdata = []
-#     lencollumn = len(listcol)
-#     index1 = 2
-#     index2 = 3
-#     while flag:
-#         collumntupla = (listcol[index1], listcol[index2])
-#         listdata.append(collumntupla)
-#         index1 += 2
-#         index2 += 2
-#         if index2 > lencollumn:
-#             flag = False
-#     return listdata
-
-
-# Function to analize data of equipment stringbox
-# def organizetuplastringsbox(listcol):
-#     flag = True
-#     listdata = []
-#     lencollumn = len(listcol)
-#     index1 = 2
-#     index2 = 3
-#     index3 = 4
-#     while flag:
-#         collumntupla = (listcol[index1], listcol[index2], listcol[index3])
-#         listdata.append(collumntupla)
-#         index1 += 3
-#         index2 += 3
-#         index3 += 3
-#         if index2 > lencollumn:
-#             flag = False
-#     return listdata
 
 
 # Function to prepare date to use as names in sheets
@@ -162,6 +128,19 @@ def sheetdestination(*args):
         sheetdest3 = os.path.join(args[0], 'sol do futuro', args[1])
         return sheetdest3
 
+
+# Function to calculate time execution
+def executiontime(*args):
+    execution = args[0] - args[1]
+    hr = execution // 3600
+    if hr == 0:
+        minute = execution // 60
+        seg = round((execution % 60) // 1, 2)
+    else:
+        resthr = execution % 3600
+        minute = resthr // 60
+        seg = round((minute % 60) // 1, 2)
+    return hr, minute, seg
 
 # Function to create name to each file inverter
 # def stamp(*args):
@@ -215,20 +194,6 @@ def sheetdestination(*args):
 #         return labelstamp3
 
 
-# Function to calculate time execution
-def executiontime(*args):
-    execution = args[0] - args[1]
-    hr = execution // 3600
-    if hr == 0:
-        minute = execution // 60
-        seg = round((execution % 60) // 1, 2)
-    else:
-        resthr = execution % 3600
-        minute = resthr // 60
-        seg = round((minute % 60) // 1, 2)
-    return hr, minute, seg
-
-
 # Function to analize data of equipment strings (descarte)
 # def organizetuplastrings(listcol):
 #     flag = True
@@ -242,3 +207,49 @@ def executiontime(*args):
 #         if index1 > lencollumn:
 #             flag = False
 #     return listdata
+
+
+# # Function to analize data of equipment inverter
+# def organizetuplainverter(listcol):
+#     flag = True
+#     listdata = []
+#     lencollumn = len(listcol)
+#     index1 = 2
+#     index2 = 3
+#     while flag:
+#         collumntupla = (listcol[index1], listcol[index2])
+#         listdata.append(collumntupla)
+#         index1 += 2
+#         index2 += 2
+#         if index2 > lencollumn:
+#             flag = False
+#     return listdata
+
+
+# Function to analize data of equipment stringbox
+# def organizetuplastringsbox(listcol):
+#     flag = True
+#     listdata = []
+#     lencollumn = len(listcol)
+#     index1 = 2
+#     index2 = 3
+#     index3 = 4
+#     while flag:
+#         collumntupla = (listcol[index1], listcol[index2], listcol[index3])
+#         listdata.append(collumntupla)
+#         index1 += 3
+#         index2 += 3
+#         index3 += 3
+#         if index2 > lencollumn:
+#             flag = False
+#     return listdata
+
+
+# Function to format date column and time column
+# def readframe(df):
+#     df['Date'] = pd.to_datetime(df['Date'])
+#     df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+#     df['Time'] = pd.to_datetime(df['Time'])
+#     df['Time'] = df['Time'].dt.strftime('%H:%M:%S')
+#     df['Date'] = df['Date'] + ' ' + df['Time']
+#     return df
