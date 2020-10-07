@@ -1,16 +1,16 @@
 import pandas as pd
-import steagsupports
+import steagsupports_factory
 
 
 # Class to create dataframe to stringbox equipment and save in sheet destiny
 class Stringbox:
 
     @staticmethod
-    def calcstringsbox(caminho, periodo, place, destino):
-        df = pd.read_excel(caminho)
+    def calcstringsbox(frm, periodo, place, destino):
+        df = frm
         column = df.columns.values
         lista_plant = Stringbox.organizetuplastringsbox(column)
-        files = steagsupports.sheetdestination(destino, periodo, place)
+        files = steagsupports_factory.sheetdestination(destino, periodo, place)
         numberbox = 0
         for i in lista_plant:
             columnfilter = [column[0], column[1], i[1], i[2], i[0]]
@@ -25,7 +25,7 @@ class Stringbox:
             df_fin.to_csv(sheetname, index=False)
             numberbox += 1
             print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
-        print('\nVolume de dados: {} arquivos processados'.format(numberbox))
+        #print('\nVolume de dados: {} arquivos processados'.format(numberbox))
 
     @staticmethod
     # Function to analize data of equipment stringbox
