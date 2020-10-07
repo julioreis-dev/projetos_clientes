@@ -12,10 +12,13 @@ extração VPN levando em consideração os critérios de cada equipamento e as 
 fornece diversos arquivos divididos com extensão (.csv) que servirá como base para a aplicação corporativa 
 que calcula os indices de interesse e relevância do negócio.
 Dados de entrada:
+
 Variáveis Inversores
 Active Power - COMS STATUS
+
 Variáveis String Box
 COMS STATUS - Current - Power
+
 Variáveis Strings
 DC CURRENT STRING XX
 '''
@@ -43,7 +46,7 @@ class Managerengine:
 def main():
     listpath = []
     listequip = ['INVERTER', 'STRING BOX', 'STRING', 'WEATHER STATION']
-    print('################# Steag Energy Service Brasil #################')
+    print('################## Steag Energy Service Brasil ##################')
     for equip in listequip:
         selectfile = input('Digite o nome do arquivo {}(.xlsx):'.format(equip))
         pathfile = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selectfile)
