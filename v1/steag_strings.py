@@ -1,15 +1,15 @@
 import pandas as pd
-import steagsupports
+import steagsupports_factory
 
 
 # Classe to create dataframe to string equipment and save in sheet destiny
 class Strings:
 
     @staticmethod
-    def calcstrings(caminho, periodo, place, destino):
-        df = pd.read_excel(caminho)
+    def calcstrings(frm, periodo, place, destino):
+        df = frm
         column = df.columns.values
-        files = steagsupports.sheetdestination(destino, periodo, place)
+        files = steagsupports_factory.sheetdestination(destino, periodo, place)
         numberstrings = 0
         for i in range(2, len(column)):
             columnfilter = [column[0], column[1], column[i]]
@@ -24,7 +24,7 @@ class Strings:
             df_fin.to_csv(sheetname, index=False)
             numberstrings += 1
             print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
-        print('\nVolume de dados: {} arquivos processados'.format(numberstrings))
+        #print('\nVolume de dados: {} arquivos processados'.format(numberstrings))
 
     @staticmethod
     def readframe(df):
@@ -45,7 +45,7 @@ class Strings:
             namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:43]}'
             return namestamp2
         elif args[2] == 3:
-            namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:45]}'
+            namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:45]}'  # ****************
             return namestamp3
 
     @staticmethod
