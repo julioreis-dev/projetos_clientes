@@ -24,7 +24,6 @@ class Strings:
             df_fin.to_csv(sheetname, index=False)
             numberstrings += 1
             print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
-        #print('\nVolume de dados: {} arquivos processados'.format(numberstrings))
 
     @staticmethod
     def readframe(df):
