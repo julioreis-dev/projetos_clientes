@@ -1,16 +1,16 @@
 import pandas as pd
-import steagsupports
+import steagsupports_factory
 
 
 # Classe to create inverter dataframe and save in sheet destiny
 class Inverter:
 
     @staticmethod
-    def calcinverter(caminho, periodo, place, destino):
-        df = pd.read_excel(caminho)
+    def calcinverter(frm, periodo, place, destino):
+        df = frm
         column = df.columns.values
         lista_plant = Inverter.organizetuplainverter(column)
-        files = steagsupports.sheetdestination(destino, periodo, place)
+        files = steagsupports_factory.sheetdestination(destino, periodo, place)
         numberinv = 0
         for i in lista_plant:
             columnfilter = [column[0], column[1], i[0], i[1]]
@@ -24,7 +24,7 @@ class Inverter:
             df_fin.to_csv(sheetname, index=False)
             numberinv += 1
             print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
-        print('\nVolume de dados: {} arquivos processados'.format(numberinv))
+        #print('\nVolume de dados: {} arquivos processados'.format(numberinv))
 
     @staticmethod
     # Function to analize data of equipment inverter
