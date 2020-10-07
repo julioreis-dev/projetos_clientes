@@ -1,5 +1,5 @@
 import steagsupports_factory
-from time import time
+from time import time, sleep
 import steag_inverter as inv
 import steag_stringbox as box
 import steag_strings as stg
@@ -41,40 +41,37 @@ class Managerengine:
 
 
 def main():
+    listpath = []
+    listequip = ['INVERTER', 'STRING BOX', 'STRING', 'WEATHER STATION']
     print('################# Steag Energy Service Brasil #################')
-    selinverter = input('Digite o nome do arquivo INVERTER(.xlsx):')
-    selstrbox = input('Digite o nome do arquivo STRING BOX(.xlsx):')
-    selstr = input('Digite o nome do arquivo STRING(.xlsx):')
-    selweather = input('Digite o nome do arquivo WEATHER STATION(.xlsx):')
-    pathinverter = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selinverter)
-    pathstrbox = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selstrbox)
-    pathstr = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selstr)
-    pathweather = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selweather)
+    for equip in listequip:
+        selectfile = input('Digite o nome do arquivo {}(.xlsx):'.format(equip))
+        pathfile = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selectfile)
+        listpath.append(pathfile)
     destino = r'c:\steag_plantas'
     period = steagsupports_factory.option()
     place = steagsupports_factory.option1()
     if place != 0:
-        v0 = time()
-        print('Processando.......\n')
+        print('Processando..............')
         steagsupports_factory.createsheets(destino)
         steagsupports_factory.createsubsheets(destino)
         steagsupports_factory.sheetperiod(place, destino, period)
-        openfiles = steagsupports_factory.openfiles(pathinverter, pathstrbox, pathstr, pathweather)
-        x = Managerengine(openfiles[0], period, place, destino, 1)
-        t1 = Thread(target=x.factory)
-        t1.start()
-        y = Managerengine(openfiles[1], period, place, destino, 2)
-        t2 = Thread(target=y.factory)
-        t2.start()
-        z = Managerengine(openfiles[2], period, place, destino, 3)
-        t3 = Thread(target=z.factory)
-        t3.start()
-        w = Managerengine(openfiles[3], period, place, destino, 4)
-        t4 = Thread(target=w.factory)
-        t4.start()
+        sleep(3)
+        print('Realizando leitura dos arquivos!!!')
+        openfiles = steagsupports_factory.openfiles(listpath[0], listpath[1], listpath[2], listpath[3])
+        v0 = time()
+        print('Iniciando extração dos arquivos!!!\n')
+        sleep(5)
+        listdata = [(0, 1), (1, 2), (3, 4), (2, 3)]
+        for n in listdata:
+            manager = Managerengine(openfiles[n[0]], period, place, destino, n[1])
+            tag = Thread(target=manager.factory)
+            tag.start()
+            if n[0] == 2:
+                tag.join()
         v1 = time()
         tm = steagsupports_factory.executiontime(v1, v0)
-        print('Tempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
+        print('\nTempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
         print('Processo finalizado com sucesso!!!')
     else:
         exit()
