@@ -1,4 +1,4 @@
-import steagsupports
+import steagsupports_factory
 from time import time
 import steag_inverter as inv
 import steag_stringbox as box
@@ -44,19 +44,19 @@ def main():
     selected = input('Digite o nome do arquivo (.xlsx):')
     caminho = r'D:\OneDrive\Área de Trabalho\steag\atual\{}.xlsx'.format(selected)
     destino = r'c:\steag_plantas'
-    period = steagsupports.option()
-    place = steagsupports.option1()
+    period = steagsupports_factory.option()
+    place = steagsupports_factory.option1()
     if place != 0:
-        equipment = steagsupports.option2()
+        equipment = steagsupports_factory.option2()
         if equipment != 0:
             print('Processando.......\n')
             v0 = time()
-            steagsupports.createsheets(destino)
-            steagsupports.createsubsheets(destino)
-            steagsupports.sheetperiod(place, destino, period)
+            steagsupports_factory.createsheets(destino)
+            steagsupports_factory.createsubsheets(destino)
+            steagsupports_factory.sheetperiod(place, destino, period)
             Managerengine(caminho, period, place, destino, equipment).factory()
             v1 = time()
-            tm = steagsupports.executiontime(v1, v0)
+            tm = steagsupports_factory.executiontime(v1, v0)
             print('Tempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
             print('Processo finalizado com sucesso!!!')
     else:
