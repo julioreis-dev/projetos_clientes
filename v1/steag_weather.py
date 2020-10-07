@@ -1,24 +1,24 @@
 import pandas as pd
-import steagsupports
+import steagsupports_factory
 
 
 # Classe to create dataframe to weather station equipment
 class Weatherstation:
 
     @staticmethod
-    def calcweather(caminho, periodo, place, destino):
+    def calcweather(frm, periodo, place, destino):
         plant = ['Sao Pedro', 'Juazeiro', 'Sol do Futuro']
-        df_fin = pd.read_excel(caminho)
+        df_fin = frm
         df_fin = Weatherstation.readframe(df_fin)
         df_fin = df_fin.fillna(0.00)
         df_fin.rename(columns={'Date': 'timestamp'}, inplace=True)
         del df_fin['Time']
-        direct = steagsupports.sheetdestination(destino, periodo, place)
+        direct = steagsupports_factory.sheetdestination(destino, periodo, place)
         namestamp = f'{plant[place - 1]}-data-{periodo}-Weather station'
         sheetname = r'{}\{}.csv'.format(direct, namestamp)
         df_fin.to_csv(sheetname, index=False)
         print('Arquivo "{}" salvo com sucesso!!!'.format(namestamp))
-        print('\nVolume de dados: 1 arquivo processado')
+        #print('\nVolume de dados: 1 arquivo processado')
 
     @staticmethod
     def readframe(df):
