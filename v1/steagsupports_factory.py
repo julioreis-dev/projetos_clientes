@@ -21,18 +21,23 @@ def option1():
     flag = True
     while flag:
         opt = [0, 1, 2, 3]
-        plant = int(input('################################################'
-                          '\nEscolha uma das plantas disponíveis nesta aplicação:'
-                          '\nDigite 1 --> São Pedro'
-                          '\nDigite 2 --> Juazeiro'
-                          '\nDigite 3 --> Sol do Futuro'
-                          '\nDigite 0 --> Sair.'
-                          '\n################################################'
-                          '\nPrezado usuário, escolha uma opção?'))
-        if plant in opt:
-            return plant
+        plant = input('################################################'
+                      '\nEscolha uma das plantas disponíveis nesta aplicação:'
+                      '\nDigite 1 --> São Pedro'
+                      '\nDigite 2 --> Juazeiro'
+                      '\nDigite 3 --> Sol do Futuro'
+                      '\nDigite 0 --> Sair.'
+                      '\n################################################'
+                      '\nPrezado usuário, escolha uma opção?')
+        if plant.isdigit():
+            plant = int(plant)
+            if plant in opt:
+                return plant
+            else:
+                print('Opção incorreta, tente novamente.')
+                time.sleep(3)
         else:
-            print('Opção incorreta, tente novamente.')
+            print('\nPrezado usuário, tente novamente digitando um número válido!!!')
             time.sleep(3)
 
 
@@ -40,11 +45,14 @@ def openfiles(*args):
     openfiles_list = []
     cont = 1
     for n in range(0, 4):
+        print('Iniciando Etapa {}/4...............'.format(cont))
         df_read = pd.read_excel(args[n])
         openfiles_list.append(df_read)
-        print('Etapa {}/4 realizado com sucesso'.format(cont))
+        time.sleep(2)
+        print('Etapa {}/4................completed\n'.format(cont))
         cont += 1
-    time.sleep(3)
+        time.sleep(2)
+    time.sleep(2)
     return openfiles_list
 
 
