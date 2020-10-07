@@ -76,8 +76,14 @@ def main():
         v1 = time()
         tm = steagsupports_factory.executiontime(v1, v0)
         print('\nTempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
-        print('Processo finalizado com sucesso!!!\nAplicação encerrada com segurança!!!')
+        print('Processo finalizado com sucesso!!!')
+        print('Encerrando a aplicação.........')
+        sleep(3)
+        print('Aplicação encerrada com segurança!!!')
     else:
+        print('Encerrando a aplicação.........')
+        sleep(3)
+        print('Aplicação encerrada com segurança!!!')
         exit()
 
 
