@@ -25,7 +25,6 @@ class Stringbox:
             df_fin.to_csv(sheetname, index=False)
             numberbox += 1
             print('Arquivo "{}" salvo com sucesso!!!'.format(namesfile))
-        #print('\nVolume de dados: {} arquivos processados'.format(numberbox))
 
     @staticmethod
     # Function to analize data of equipment stringbox
