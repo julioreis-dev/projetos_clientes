@@ -18,7 +18,6 @@ class Weatherstation:
         sheetname = r'{}\{}.csv'.format(direct, namestamp)
         df_fin.to_csv(sheetname, index=False)
         print('Arquivo "{}" salvo com sucesso!!!'.format(namestamp))
-        #print('\nVolume de dados: 1 arquivo processado')
 
     @staticmethod
     def readframe(df):
