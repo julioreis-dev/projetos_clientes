@@ -41,6 +41,7 @@ def option1():
             time.sleep(4)
 
 
+# Function to open files
 def openfiles(*args):
     openfiles_list = []
     cont = 1
