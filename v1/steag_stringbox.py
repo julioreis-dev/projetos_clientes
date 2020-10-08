@@ -2,7 +2,7 @@ import pandas as pd
 import steagsupports_factory
 
 
-# Class to create dataframe to stringbox equipment and save in sheet destiny
+# Classe to create dataframe to stringbox equipment and save in sheet destiny
 class Stringbox:
 
     @staticmethod
