@@ -78,7 +78,7 @@ def main():
         print('\nTempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
         print('Processo finalizado com sucesso!!!')
         print('Encerrando a aplicação.........')
-        sleep(3)
+        sleep(5)
         print('Aplicação encerrada com segurança!!!')
     else:
         print('Encerrando a aplicação.........')

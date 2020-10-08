@@ -7,7 +7,7 @@ class Strings:
 
     @staticmethod
     def calcstrings(frm, periodo, place, destino):
-        df = frm
+        df = frm.fillna(0.00)
         column = df.columns.values
         files = steagsupports_factory.sheetdestination(destino, periodo, place)
         numberstrings = 0
@@ -16,7 +16,7 @@ class Strings:
             df_fin = df.filter(items=columnfilter)
             df_fin = Strings.readframe(df_fin)
             df_fin = df_fin[[column[0], column[i]]]
-            df_fin = df_fin.fillna(0.00)
+            # df_fin = df_fin.fillna(0.00)
             labelcolumn = Strings.labelstampstring(place, column[i])
             df_fin.rename(columns={'Date': 'timestamp', column[i]: labelcolumn}, inplace=True)
             namesfile = Strings.stamp2(periodo, column[i], place, 'String')

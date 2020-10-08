@@ -7,7 +7,7 @@ class Stringbox:
 
     @staticmethod
     def calcstringsbox(frm, periodo, place, destino):
-        df = frm
+        df = frm.fillna(0.00)
         column = df.columns.values
         lista_plant = Stringbox.organizetuplastringsbox(column)
         files = steagsupports_factory.sheetdestination(destino, periodo, place)
@@ -17,7 +17,7 @@ class Stringbox:
             df_fin = df.filter(items=columnfilter)
             df_fin = Stringbox.readframe(df_fin)
             df_fin = df_fin[[column[0], i[1], i[2], i[0]]]
-            df_fin = df_fin.fillna(0.00)
+            # df_fin = df_fin.fillna(0.00)
             df_fin.rename(columns={'Date': 'timestamp', i[1]: 'Current', i[2]: 'Power', i[0]: 'COMS STATUS'},
                           inplace=True)
             namesfile = Stringbox.stamp1(periodo, i[0], place, 'String box')

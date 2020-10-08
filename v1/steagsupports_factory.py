@@ -35,10 +35,10 @@ def option1():
                 return plant
             else:
                 print('Opção incorreta!!!\nPor favor, tente novamente digitando alguma das opções existentes!!!')
-                time.sleep(5)
+                time.sleep(3)
         else:
             print('Opção Incorreta!!!\nAlgum character inválido foi digitado. As opções serão fornecidas novamente!!!')
-            time.sleep(5)
+            time.sleep(4)
 
 
 def openfiles(*args):
