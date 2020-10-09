@@ -17,7 +17,6 @@ class Stringbox:
             df_fin = df.filter(items=columnfilter)
             df_fin = Stringbox.readframe(df_fin)
             df_fin = df_fin[[column[0], i[1], i[2], i[0]]]
-            # df_fin = df_fin.fillna(0.00)
             df_fin.rename(columns={'Date': 'timestamp', i[1]: 'Current', i[2]: 'Power', i[0]: 'COMS STATUS'},
                           inplace=True)
             namesfile = Stringbox.stamp1(periodo, i[0], place, 'String box')
