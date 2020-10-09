@@ -46,7 +46,7 @@ class Managerengine:
 def main():
     listpath = []
     listequip = ['INVERTER', 'STRINGBOX', 'STRING', 'WEATHER STATION']
-    print('################## Steag Energy Service Brasil ##################')
+    print('##################### Steag Energy Service Brasil ##################### V1.4')
     for equip in listequip:
         selectfile = input('Digite o nome do arquivo {}(.xlsx):'.format(equip))
         pathfile = r'C:\Users\julio.firmino\Desktop\plantas\simulado\{}.xlsx'.format(selectfile)
@@ -75,15 +75,10 @@ def main():
                 tag.join()
         v1 = time()
         tm = steagsupports_factory.executiontime(v1, v0)
-        print('\nTempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
-        print('Processo finalizado com sucesso!!!')
-        print('Encerrando a aplicação.........')
-        sleep(5)
-        print('Aplicação encerrada com segurança!!!')
+        print(tm)
+        steagsupports_factory.closeapp()
     else:
-        print('Encerrando a aplicação.........')
-        sleep(3)
-        print('Aplicação encerrada com segurança!!!')
+        steagsupports_factory.closeapp()
         exit()
 
 
