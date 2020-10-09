@@ -121,4 +121,11 @@ def executiontime(*args):
         resthr = execution % 3600
         minute = resthr // 60
         seg = round((minute % 60) // 1, 2)
-    return hr, minute, seg
+    return 'Tempo de execução da aplicação: {} hs : {} min : {} seg\nProcesso finalizado com sucesso!!!'\
+        .format(hr, minute, seg)
+
+
+def closeapp():
+    print('Encerrando a aplicação.........')
+    time.sleep(5)
+    print('Aplicação encerrada com segurança!!!')
