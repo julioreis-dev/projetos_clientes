@@ -17,7 +17,6 @@ class Inverter:
             df_fin = df.filter(items=columnfilter)
             df_fin = Inverter.readframe(df_fin)
             df_fin = df_fin[[column[0], i[0], i[1]]]
-            # df_fin = df_fin.fillna(0.00)
             df_fin.rename(columns={'Date': 'timestamp', i[0]: 'ACTIVE POWER', i[1]: 'COMS STATUS'}, inplace=True)
             namesfile = Inverter.stamp(periodo, i[0], place, 'Inverter')
             sheetname = r'{}\{}.csv'.format(files, namesfile)
