@@ -63,9 +63,6 @@ def createsheets(pasta):
     if not os.path.isdir(pasta):
         os.mkdir(pasta)
 
-
-# Function to create sheet to each plant inside 'steag_plantas'
-def createsubsheets(pasta):
     sheets = ['são pedro', 'juazeiro', 'sol do futuro']
     for n in sheets:
         sheet = os.path.join(pasta, n)
@@ -82,38 +79,17 @@ def formatdates(date):
 
 # Function to create period sheet to receive all content
 def sheetperiod(*args):
-    listplant = [(1, 'são pedro'), (2, 'juazeiro'), (3, 'sol do futuro')]
-    for n in listplant:
-        if n[0] == args[0]:
-            sheets = os.path.join(args[1], n[1], args[2])
-            if not os.path.isdir(sheets):
-                os.mkdir(sheets)
-        
-    # if args[0] == 1:
-    #     sheets = os.path.join(args[1], 'são pedro', args[2])
-    #     if not os.path.isdir(sheets):
-    #         os.mkdir(sheets)
-    # elif args[0] == 2:
-    #     sheets = os.path.join(args[1], 'juazeiro', args[2])
-    #     if not os.path.isdir(sheets):
-    #         os.mkdir(sheets)
-    # elif args[0] == 3:
-    #     sheets = os.path.join(args[1], 'sol do futuro', args[2])
-    #     if not os.path.isdir(sheets):
-    #         os.mkdir(sheets)
+    dictplant = {1: 'são pedro', 2: 'juazeiro', 3: 'sol do futuro'}
+    sheets = os.path.join(args[1], dictplant[args[0]], args[2])
+    if not os.path.isdir(sheets):
+        os.mkdir(sheets)
 
 
 # Function to inform correct sheet destiny address
 def sheetdestination(*args):
-    if args[2] == 1:
-        sheetdest1 = os.path.join(args[0], 'são pedro', args[1])
-        return sheetdest1
-    elif args[2] == 2:
-        sheetdest2 = os.path.join(args[0], 'juazeiro', args[1])
-        return sheetdest2
-    elif args[2] == 3:
-        sheetdest3 = os.path.join(args[0], 'sol do futuro', args[1])
-        return sheetdest3
+    dictplant = {1: 'são pedro', 2: 'juazeiro', 3: 'sol do futuro'}
+    sheetdest = os.path.join(args[0], dictplant[args[2]], args[1])
+    return sheetdest
 
 
 # Function to calculate time execution
@@ -127,7 +103,7 @@ def executiontime(*args):
         resthr = execution % 3600
         minute = resthr // 60
         seg = round((minute % 60) // 1, 2)
-    return 'Tempo de execução da aplicação: {} hs : {} min : {} seg\nProcesso finalizado com sucesso!!!'\
+    return 'Tempo de execução da aplicação: {} hs : {} min : {} seg\nProcesso finalizado com sucesso!!!' \
         .format(hr, minute, seg)
 
 
