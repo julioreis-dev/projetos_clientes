@@ -66,13 +66,11 @@ def createsheets(pasta):
 
 # Function to create sheet to each plant inside 'steag_plantas'
 def createsubsheets(pasta):
-    sheet1 = os.path.join(pasta, 'são pedro')
-    sheet2 = os.path.join(pasta, 'juazeiro')
-    sheet3 = os.path.join(pasta, 'sol do futuro')
-    sheets = [sheet1, sheet2, sheet3]
+    sheets = ['são pedro', 'juazeiro', 'sol do futuro']
     for n in sheets:
-        if not os.path.isdir(n):
-            os.mkdir(n)
+        sheet = os.path.join(pasta, n)
+        if not os.path.isdir(sheet):
+            os.mkdir(sheet)
 
 
 # Function to prepare date to use as names in sheets
@@ -84,18 +82,25 @@ def formatdates(date):
 
 # Function to create period sheet to receive all content
 def sheetperiod(*args):
-    if args[0] == 1:
-        sheets = os.path.join(args[1], 'são pedro', args[2])
-        if not os.path.isdir(sheets):
-            os.mkdir(sheets)
-    elif args[0] == 2:
-        sheets = os.path.join(args[1], 'juazeiro', args[2])
-        if not os.path.isdir(sheets):
-            os.mkdir(sheets)
-    elif args[0] == 3:
-        sheets = os.path.join(args[1], 'sol do futuro', args[2])
-        if not os.path.isdir(sheets):
-            os.mkdir(sheets)
+    listplant = [(1, 'são pedro'), (2, 'juazeiro'), (3, 'sol do futuro')]
+    for n in listplant:
+        if n[0] == args[0]:
+            sheets = os.path.join(args[1], n[1], args[2])
+            if not os.path.isdir(sheets):
+                os.mkdir(sheets)
+        
+    # if args[0] == 1:
+    #     sheets = os.path.join(args[1], 'são pedro', args[2])
+    #     if not os.path.isdir(sheets):
+    #         os.mkdir(sheets)
+    # elif args[0] == 2:
+    #     sheets = os.path.join(args[1], 'juazeiro', args[2])
+    #     if not os.path.isdir(sheets):
+    #         os.mkdir(sheets)
+    # elif args[0] == 3:
+    #     sheets = os.path.join(args[1], 'sol do futuro', args[2])
+    #     if not os.path.isdir(sheets):
+    #         os.mkdir(sheets)
 
 
 # Function to inform correct sheet destiny address
