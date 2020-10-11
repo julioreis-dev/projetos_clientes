@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import time
 from datetime import datetime
+import re
 
 
 # Function to input extract period
@@ -129,3 +130,17 @@ def closeapp():
     print('Encerrando a aplicação.........')
     time.sleep(5)
     print('Aplicação encerrada com segurança!!!')
+
+
+def catalogfiles(directory):
+    listfile = []
+    listequip = ['INVERTER', 'STRINGBOX', 'STRING', 'WEATHER STATION']
+    lista_arquivos = os.listdir(directory)
+    for plant in listequip:
+        for contents in lista_arquivos:
+            if re.search('\\b' + plant + '\\b', contents, re.IGNORECASE):
+                content = os.path.join(directory, contents)
+                if os.path.isfile(content):
+                    listfile.append(content)
+                    break
+    return listfile
