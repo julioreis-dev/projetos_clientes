@@ -1,84 +1,54 @@
-import steagsupports_factory
-from time import time, sleep
-import steag_inverter as inv
-import steag_stringbox as box
-import steag_strings as stg
-import steag_weather as wtr
-from threading import Thread
+import steagsupports
+from time import time
+import steagframes
 
 '''
-Esta aplicação tem por finalidade trabalhar a planilha com extensão (.xlsx) que contem os dados oriundos da 
-extração VPN levando em consideração os critérios de cada equipamento e as suas respectivas plantas. O produto final
+Esta aplicação tem por finalidade trabalhar a planilha com extensão (.xlsx) que contem os dados oriundos da extração VPN
+levando em consideração os critérios de cada equipamento e as suas respectivas plantas. O produto final
 fornece diversos arquivos divididos com extensão (.csv) que servirá como base para a aplicação corporativa 
 que calcula os indices de interesse e relevância do negócio.
-
 Dados de entrada:
 Variáveis Inversores
-Data - Hora - Active Power - COMS STATUS
-
+Active Power - COMS STATUS
 Variáveis String Box
-Data - Hora - COMS STATUS - Current - Power
-
+COMS STATUS - Current - Power
 Variáveis Strings
-Data - Hora - DC CURRENT STRING XX
+DC CURRENT STRING XX
 '''
-
-
-class Managerengine:
-    def __init__(self, frame, period, place, destino, equip):
-        self.frame = frame
-        self.period = period
-        self.place = place
-        self.destino = destino
-        self.equip = equip
-
-    def factory(self):
-        if self.equip == 1:
-            inv.Inverter.calcinverter(self.frame, self.period, self.place, self.destino)
-        elif self.equip == 2:
-            box.Stringbox.calcstringsbox(self.frame, self.period, self.place, self.destino)
-        elif self.equip == 3:
-            stg.Strings.calcstrings(self.frame, self.period, self.place, self.destino)
-        elif self.equip == 4:
-            wtr.Weatherstation.calcweather(self.frame, self.period, self.place, self.destino)
 
 
 def main():
-    listpath = []
-    listequip = ['INVERTER', 'STRINGBOX', 'STRING', 'WEATHER STATION']
-    print('##################### Steag Energy Service Brasil ##################### V1.4')
-    for equip in listequip:
-        selectfile = input('Digite o nome do arquivo {}(.xlsx):'.format(equip))
-        pathfile = r'C:\Users\julio.firmino\Desktop\plantas\simulado\{}.xlsx'.format(selectfile)
-        listpath.append(pathfile)
+    print('################# Steag Energy Service Brasil #################')
+    selected = input('Digite o nome do arquivo (.xlsx):')
+    caminho = r'C:\Users\julio.firmino\Desktop\plantas\simulado\{}.xlsx'.format(selected)
     destino = r'c:\steag_plantas'
-    period = steagsupports_factory.option()
-    place = steagsupports_factory.option1()
+    steagsupports.createsheets(destino)
+    steagsupports.createsubsheets(destino)
+    period = steagsupports.option()
+    place = steagsupports.option1()
     if place != 0:
-        print('Processando..............')
-        steagsupports_factory.createsheets(destino)
-        steagsupports_factory.createsubsheets(destino)
-        steagsupports_factory.sheetperiod(place, destino, period)
-        sleep(5)
-        print('Realizando leitura dos arquivos!!!')
-        sleep(3)
-        openfiles = steagsupports_factory.openfiles(listpath[0], listpath[1], listpath[2], listpath[3])
-        v0 = time()
-        print('Iniciando extração dos arquivos!!!\n')
-        sleep(5)
-        listdata = [(0, 1), (1, 2), (3, 4), (2, 3)]
-        for n in listdata:
-            manager = Managerengine(openfiles[n[0]], period, place, destino, n[1])
-            tag = Thread(target=manager.factory)
-            tag.start()
-            if n[0] == 2:
-                tag.join()
-        v1 = time()
-        tm = steagsupports_factory.executiontime(v1, v0)
-        print(tm)
-        steagsupports_factory.closeapp()
+        equipment = steagsupports.option2()
+        if equipment != 0:
+            v0 = time()
+            steagsupports.sheetperiod(place, destino, period)
+            print('Processando.......\n')
+            if equipment == 1:
+                continv = steagframes.calcinverter(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivos processados'.format(continv))
+            elif equipment == 2:
+                contbox = steagframes.calcstringsbox(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivos processados'.format(contbox))
+            elif equipment == 3:
+                contstrings = steagframes.calcstrings(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivos processados'.format(contstrings))
+            elif equipment == 4:
+                contweather = steagframes.calcweather(caminho, period, place, destino)
+                print('\nVolume de dados: {} arquivo processado'.format(contweather))
+            v1 = time()
+            tm = steagsupports.executiontime(v1, v0)
+            print('Tempo de execução da aplicação: {} hs : {} min : {} seg'.format(tm[0], tm[1], tm[2]))
+            print('Processo finalizado com sucesso!!!')
     else:
-        steagsupports_factory.closeapp()
         exit()
 
 
