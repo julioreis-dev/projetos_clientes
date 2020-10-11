@@ -7,7 +7,7 @@ import re
 
 # Function to input extract period
 def option():
-    print('################################################')
+    print('##################### Steag Energy Service Brasil ##################### V1.5')
     print('Digite o período de extração dos dados:')
     date1 = input('Data inicial: ')
     start = formatdates(date1)
@@ -35,7 +35,7 @@ def option1():
             if plant in opt:
                 return plant
             else:
-                print('Opção incorreta!!!\nPor favor, tente novamente digitando alguma das opções existentes!!!')
+                print('Opção Incorreta!!!\nPor favor, tente novamente digitando alguma das opções existentes!!!')
                 time.sleep(3)
         else:
             print('Opção Incorreta!!!\nAlgum character inválido foi digitado. As opções serão fornecidas novamente!!!')
@@ -70,13 +70,6 @@ def createsheets(pasta):
             os.mkdir(sheet)
 
 
-# Function to prepare date to use as names in sheets
-def formatdates(date):
-    timedata = datetime.strptime(date, '%d/%m/%Y').date()
-    formatdata = timedata.strftime('%Y-%m-%d')
-    return formatdata
-
-
 # Function to create period sheet to receive all content
 def sheetperiod(*args):
     dictplant = {1: 'são pedro', 2: 'juazeiro', 3: 'sol do futuro'}
@@ -90,6 +83,13 @@ def sheetdestination(*args):
     dictplant = {1: 'são pedro', 2: 'juazeiro', 3: 'sol do futuro'}
     sheetdest = os.path.join(args[0], dictplant[args[2]], args[1])
     return sheetdest
+
+
+# Function to prepare date to use as names in sheets
+def formatdates(date):
+    timedata = datetime.strptime(date, '%d/%m/%Y').date()
+    formatdata = timedata.strftime('%Y-%m-%d')
+    return formatdata
 
 
 # Function to calculate time execution
