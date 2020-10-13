@@ -41,8 +41,8 @@ class Managerengine:
 
 
 def main():
-    pathfiles = r'D:\OneDrive\Área de Trabalho\steag\atual'
-    destino = r'c:\steag_plantas'
+    pathfiles = r'C:\convert\entrada'
+    destino = r'c:\convert\saida'
     listpath = steagsupports_factory.catalogfiles(pathfiles)
     period = steagsupports_factory.option()
     place = steagsupports_factory.option1()
@@ -50,20 +50,24 @@ def main():
         print('Processando..............')
         steagsupports_factory.createsheets(destino)
         steagsupports_factory.sheetperiod(place, destino, period)
-        sleep(3)
+        sleep(2)
         print('Realizando leitura dos arquivos!!!')
-        sleep(3)
+        sleep(2)
         openfiles = steagsupports_factory.openfiles(listpath[0], listpath[1], listpath[2], listpath[3])
         v0 = time()
         print('Iniciando extração dos arquivos!!!\n')
-        sleep(5)
+        sleep(2)
         listdata = [(0, 1), (1, 2), (3, 4), (2, 3)]
         for n in listdata:
-            manager = Managerengine(openfiles[n[0]], period, place, destino, n[1])
-            tag = Thread(target=manager.factory)
-            tag.start()
             if n[0] == 2:
+                manager = Managerengine(openfiles[n[0]], period, place, destino, n[1])
+                tag = Thread(target=manager.factory)
+                tag.start()
                 tag.join()
+            else:
+                manager = Managerengine(openfiles[n[0]], period, place, destino, n[1])
+                tag = Thread(target=manager.factory)
+                tag.start()
         v1 = time()
         tm = steagsupports_factory.executiontime(v1, v0)
         print(tm)
