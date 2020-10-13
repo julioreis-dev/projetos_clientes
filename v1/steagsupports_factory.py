@@ -117,11 +117,11 @@ def catalogfiles(directory):
     listfile = []
     listequip = ['INVERTER', 'STRINGBOX', 'STRING', 'WEATHER STATION']
     lista_arquivos = os.listdir(directory)
-    for plant in listequip:
+    for typequip in listequip:
         for contents in lista_arquivos:
-            if re.search('\\b' + plant + '\\b', contents, re.IGNORECASE):
-                content = os.path.join(directory, contents)
-                if os.path.isfile(content):
-                    listfile.append(content)
+            if re.search('\\b' + typequip + '\\b', contents, re.IGNORECASE):
+                contentpath = os.path.join(directory, contents)
+                if os.path.isfile(contentpath):
+                    listfile.append(contentpath)
                     break
     return listfile
