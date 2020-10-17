@@ -37,7 +37,7 @@ class Strings:
     # Method to create label to each file of equipment string
     def stamp2(*args):
         if args[2] == 1:
-            namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'
+            namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'# revisar e ajustar
             return namestamp1
         elif args[2] == 2:
             namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:43]}'
