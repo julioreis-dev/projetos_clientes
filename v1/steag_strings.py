@@ -44,7 +44,7 @@ class Strings:
             namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:43]}'
             return namestamp2
         elif args[2] == 3:
-            namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:52]}'# realizar Ajuste
+            namestamp3 = f'Sol do Futuro-data-{args[0]}-{args[3]}-{args[1][16:52]}'
             return namestamp3
 
     @staticmethod
