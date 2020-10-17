@@ -38,7 +38,7 @@ class Strings:
     # Function to create name to each file string
     def stamp2(*args):
         if args[2] == 1:
-            namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'# realizar ajuste
+            namestamp1 = f'Sao Pedro-data-{args[0]}-{args[3]}-{args[1][12:27]}'
             return namestamp1
         elif args[2] == 2:
             namestamp2 = f'Juazeiro-data-{args[0]}-{args[3]}-{args[1][11:43]}'# realizar ajuste
