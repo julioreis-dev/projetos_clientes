@@ -2,6 +2,17 @@
 import sys
 import os
 import requests
+import steagsupports_factory
+from time import time, sleep
+import steag_inverter as inv
+import steag_stringbox as box
+import steag_strings as stg
+import steag_weather as wtr
+from threading import Thread
+from datetime import datetime
+import pandas as pd
+import re
+
 from cx_Freeze import setup, Executable
 
 base = None
@@ -11,11 +22,13 @@ base = None
 
 executables = [
     # Nome do seu arquivo .py que quer converter para .exe
-    Executable("steag_menu.py", base=base)
+    Executable("steag_menu.py", base=base,
+               targetName="App_steag",
+               icon="steag.ico")
 ]
 
 buildOptions = dict(
-    packages=["idna"],
+    packages=[],
     includes=[],
     include_files=[],
     excludes=[]
